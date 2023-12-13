@@ -53,7 +53,7 @@ app.layout = html.Main([
 
     dbc.Row(
 
-        dbc.Col(html.H2(children= 'Retorno Modelo', className='titulo-dash'), style= {'display': 'flex', 'justify-content': 'center'})
+        dbc.Col(html.H2(children= 'Retorno Acumulado', className='titulo-dash'), style= {'display': 'flex', 'justify-content': 'center'})
 
     ),
     dbc.Row(

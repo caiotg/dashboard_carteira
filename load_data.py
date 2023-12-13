@@ -55,7 +55,7 @@ if __name__ == "__main__":
     
     dotenv.load_dotenv()
 
-    os.chdir(r'C:\Users\Caio\Documents\dev\github\rentabilidade_carteira\dados')
+    os.chdir(r'C:\Users\Caio\Documents\dev\github\dashboard_carteira\dados')
 
     chaveApi = os.getenv('API_FINTZ')
     headers = {'accept': 'application/json',
