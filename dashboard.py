@@ -8,7 +8,7 @@ from funcoes_graficos import grafico_candlestick, grafico_retorno_modelo
 from carteira_atual import cotacoes_carteira_vigente
 
 carteiraVigente = carteira_vigente()
-carteiraAtual = cotacoes_carteira_vigente(nome_carteira = 'carteiras')
+carteiraAtual = cotacoes_carteira_vigente(nome_carteira = 'carteira1')
 
 app = dash.Dash(
     external_stylesheets=[dbc.themes.SLATE]
@@ -59,7 +59,7 @@ app.layout = html.Main([
     dbc.Row(
 
         dbc.Col([
-            html.Div(dcc.Graph(figure= grafico_retorno_modelo(nome_carteira = 'carteiras'), style={'height': "470px",'margin-right':'100px', 'margin-left': '100px', 'margin-bottom': '16px','border-radius':'8px', 'background-color': 'white', 'border': "2px solid #212946"}))
+            html.Div(dcc.Graph(figure= grafico_retorno_modelo(nome_carteira = 'carteira1'), style={'height': "470px",'margin-right':'100px', 'margin-left': '100px', 'margin-bottom': '16px','border-radius':'8px', 'background-color': 'white', 'border': "2px solid #212946"}))
         ])
     )
 

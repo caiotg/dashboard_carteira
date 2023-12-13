@@ -89,4 +89,4 @@ if __name__ == "__main__":
     ibov = pd.read_parquet(r'dados\ibov.parquet')
     cdi = pd.read_parquet(r'dados\cdi.parquet')
 
-    adicionando_carteira_vigente(dados, carteira_vigente, data_compra, nome='teste2')
+    adicionando_carteira_vigente(dados, carteira_vigente, data_compra, nome='carteira1')
