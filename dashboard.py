@@ -3,12 +3,11 @@ import dash
 import pandas as pd
 from dash import Dash, html, dcc, dash_table, callback
 from dash.dependencies import Input, Output
-from funcoes_carteira import carteira_vigente
-from funcoes_graficos import grafico_candlestick, grafico_retorno_modelo
-from carteira_atual import cotacoes_carteira_vigente
+from funcoes_graficos import grafico_candlestick
+from carteira import Carteira
 
-carteiraVigente = carteira_vigente()
-carteiraAtual = cotacoes_carteira_vigente(nome_carteira = 'carteira1')
+
+carteira = Carteira(dataCompra= '2023-12-11', carteiraVigente= ['CSED3','CSUD3','KEPL3','LAVV3','MDNE3','PFRM3','SOJA3','TGMA3','VLID3','WIZC3'], nomeCarteira= 'carteira1')
 
 app = dash.Dash(
     external_stylesheets=[dbc.themes.SLATE]
@@ -29,14 +28,14 @@ app.layout = html.Main([
 
             dbc.Col([
 
-                html.Div(dcc.Dropdown(carteiraVigente, carteiraVigente[0], id='dropdown_escolher_acao', style={'margin-left': '50px','border-radius':'8px', 'width': '850px'})),
+                html.Div(dcc.Dropdown(carteira.carteiraVigente, carteira.carteiraVigente[0], id='dropdown_escolher_acao', style={'margin-left': '50px','border-radius':'8px', 'width': '850px'})),
                 html.Div(children= dcc.Graph(id='grafico_acao_callback', style= {'margin-left': '100px', 'margin-right': '0px','height': '293px', 'width': '850px', 'border-radius': '8px', 'background-color': 'white'})),
          
         ]),
 
             dbc.Col(
 
-                dash_table.DataTable(carteiraAtual.to_dict('records'), 
+                dash_table.DataTable(carteira.cotacoesAtualizadas.to_dict('records'), 
                                      style_header= {'backgroundColor': '#d3d3d3','fontWeight': 'bold','border': '0px','font-size': "15px",'color': 'black',"borderRadius": "8px"}, 
                                      style_cell={'textAlign': 'center','padding': '4px 4px','backgroundColor': 'white',"borderRadius": "8px",'color': 'black'}, 
                                      style_data={ 'border': '0px','font-size': "15px"},
@@ -59,7 +58,7 @@ app.layout = html.Main([
     dbc.Row(
 
         dbc.Col([
-            html.Div(dcc.Graph(figure= grafico_retorno_modelo(nome_carteira = 'carteira1'), style={'height': "470px",'margin-right':'100px', 'margin-left': '100px', 'margin-bottom': '16px','border-radius':'8px', 'background-color': 'white', 'border': "2px solid #212946"}))
+            html.Div(dcc.Graph(figure= carteira.figRetornoModelo, style={'height': "470px",'margin-right':'100px', 'margin-left': '100px', 'margin-bottom': '16px','border-radius':'8px', 'background-color': 'white', 'border': "2px solid #212946"}))
         ])
     )
 

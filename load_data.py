@@ -4,9 +4,9 @@ import os
 import urllib.request
 import dotenv
 
-def pegar_cotacoes(headers):
+def pegar_cotacoes(headers, dataInicio):
 
-    response = requests.get(f'https://api.fintz.com.br/bolsa/b3/avista/cotacoes/historico/arquivos?classe=ACOES&preencher=true', headers= headers)
+    response = requests.get('https://api.fintz.com.br/bolsa/b3/avista/cotacoes/historico/arquivos?classe=ACOES&preencher=true', headers= headers)
 
     linkDownload = (response.json())['link']
 
@@ -22,14 +22,16 @@ def pegar_cotacoes(headers):
 
     df['preco_fechamento_ajustado'] = df.groupby('ticker')['preco_fechamento_ajustado'].transform('ffill')
 
+    df = df.loc[df['data'] >= dataInicio]
+    
     df = df.sort_values('data', ascending=True)
 
     df.to_parquet('cotacoes.parquet', index= False)
 
 
-def ibov(headers):
+def ibov(headers, dataInicio):
 
-    response = requests.get('https://api.fintz.com.br/indices/historico?indice=IBOV&dataInicio=2000-01-01', headers=headers)
+    response = requests.get(f'https://api.fintz.com.br/indices/historico?indice=IBOV&dataInicio={dataInicio}', headers=headers)
 
     df = pd.DataFrame(response.json())
     df = df.sort_values('data', ascending= True)
@@ -39,9 +41,9 @@ def ibov(headers):
     df.to_parquet('ibov.parquet', index= False)
 
 
-def cdi(headers):
+def cdi(headers, dataInicio):
 
-    response = requests.get('https://api.fintz.com.br/taxas/historico?codigo=12&dataInicio=2000-01-01&ordem=ASC', headers= headers)
+    response = requests.get(f'https://api.fintz.com.br/taxas/historico?codigo=12&dataInicio={dataInicio}&ordem=ASC', headers= headers)
 
     cdi = pd.DataFrame(response.json())
     cdi = cdi.drop(["dataFim", 'nome'], axis = 1)
@@ -61,6 +63,8 @@ if __name__ == "__main__":
     headers = {'accept': 'application/json',
             'X-API-Key': chaveApi}
 
-    pegar_cotacoes(headers= headers)
-    ibov(headers= headers)
-    cdi(headers=headers)
+    dataInicio = '2023-09-01'
+
+    pegar_cotacoes(headers= headers, dataInicio= dataInicio)
+    ibov(headers= headers, dataInicio= dataInicio)
+    cdi(headers=headers, dataInicio= dataInicio)

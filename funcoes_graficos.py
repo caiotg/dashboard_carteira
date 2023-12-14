@@ -2,8 +2,6 @@
 import datetime
 import pandas as pd
 import plotly.graph_objects as go
-from funcoes_carteira import calculando_rentabilidade
-
 
 def grafico_candlestick(valor_dropdown, dados):
 
@@ -34,17 +32,9 @@ def grafico_candlestick(valor_dropdown, dados):
 
     return graficoCandleStick
 
-def grafico_retorno_modelo(nome_carteira = ''):
+def grafico_retorno_modelo(retornoModelo, ibov, cdi):
 
-    dados = pd.read_parquet(r'dados\cotacoes.parquet')
-    dados = dados[['data', 'ticker', 'preco_fechamento_ajustado']]
-
-    ibov = pd.read_parquet(r'dados\ibov.parquet')
-    cdi = pd.read_parquet(r'dados\cdi.parquet')
-
-    carteiras = pd.read_excel(fr'carteiras\{nome_carteira}.xlsx')
-    
-    dfRetornoModelo = calculando_rentabilidade(dados, carteiras)
+    dfRetornoModelo = retornoModelo
     dfRetornoModelo['data'] = pd.to_datetime(dfRetornoModelo['data'])
     dfRetornoModelo = dfRetornoModelo.set_index('data')
 
