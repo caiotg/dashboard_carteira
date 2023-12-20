@@ -1,4 +1,4 @@
-# Dashboar para carteira de investimentos
+# Dashboard para carteira de investimentos
 
 Esse projeto foi feito para acompanhar a rentabilidade acumulada de uma carteira de investimentos. O dashboard tem um gráfico de candlestick com os últimos 30 dias de negociaçãos das ações presentes na carteira, uma tabela com os ativos da carteira e o preço de compra e um gráfico com a rentabilidade acumulada da carteira comparada ao ibov e cdi.
 
