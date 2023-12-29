@@ -8,7 +8,6 @@ load_figure_template('slate')
 
 carteira = Carteira(dataCompra= '2023-12-11', carteiraVigente= ['CSED3','CSUD3','KEPL3','LAVV3','MDNE3','PFRM3','SOJA3','TGMA3','VLID3','WIZC3'], nomeCarteira= 'carteira1')
 
-
 layout_acoes = dbc.Row([
     
     dbc.Col([
@@ -29,37 +28,6 @@ layout_retorno_modelo = dbc.Row(
     dbc.Col(dcc.Graph(figure= carteira.figRetornoModelo, style={'height': "470px", 'background-color': '#272B30', 'border-radius': '8px'}))
 
 )
-
-
-# layout = html.Div([
-#     dbc.Row([
-#         dbc.Col(html.H2(children= 'Gráfico Ação', className='titulo-dash'), style= {'display': 'flex', 'justify-content': 'center'}),
-#         dbc.Col(html.H2(children= 'Ativos na Carteira', className='titulo-dash'), style= {'display': 'flex', 'justify-content': 'center'})
-#     ]),
-#     dbc.Row([
-#         dbc.Col([
-#             html.Div(dcc.Dropdown(carteira.carteiraVigente, carteira.carteiraVigente[0], id='dropdown_escolher_acao', style={'border-radius':'8px', 'width': '200px', 'background-color': '#7a7a7a', 'color': 'white'})),
-#             html.Div(children= dcc.Graph(id='grafico_acao_callback', style= {'height': '294px', 'border-radius': '8px'})) 
-#         ]),
-#         dbc.Col(
-#             dash_table.DataTable(carteira.cotacoesAtualizadas.to_dict('records'), 
-#                                      style_header= {'backgroundColor': '#7a7a7a','fontWeight': 'bold','border': '0px','font-size': "15px",'color': 'black',"borderRadius": "8px"}, 
-#                                      style_cell={'textAlign': 'center','padding': '4px 4px','backgroundColor': '#d3d3d3',"borderRadius": "8px",'color': 'black'}, 
-#                                      style_data={ 'border': '0px','font-size': "15px"},
-#                                      style_table={ 'borderRadius': '8px', 'overflow': 'hidden'},id= 'tabela_teste')
-#         )
-#     ]),
-#     dbc.Row([
-#         dbc.Col(),
-#         dbc.Col(html.H2(children= 'Retorno Acumulado', className='titulo-dash'), style= {'display': 'flex', 'justify-content': 'center'}),
-#         dbc.Col()
-#     ]),
-#     dbc.Row([
-#         dbc.Col(
-#             html.Div(dcc.Graph(figure= carteira.figRetornoModelo, style={'height': "470px",'border-radius':'8px'}))
-#         )
-#     ])
-# ])
 
 @app.callback(
     Output('grafico_acao_callback', 'figure'),

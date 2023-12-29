@@ -11,7 +11,7 @@ Esse projeto foi feito para acompanhar a rentabilidade acumulada de uma carteira
   Os dados utilizados são retirados da API da FINTZ, os parquets usados para fazer backtest e criar as carteiras mensais são aproveitados para fazer esse dashboard. A forma como os parquets são baixados está disponível no arquivo load_data.py.
 
   ## Dashboard
-  Para rodar o dashboard é preciso criar um objeto chamdo carteira usando a classe Carteira. Nesse construtor é preciso passar 3 parâmetros: dataCompra, carteiraVigente e nomeCarteira. Os gráficos de candlestick e retorno acumulado são criados a partir das funções grafico_candlestick e grafico_retorno_modelo. O gráfico de candlestick é feito atráves de um callback, assim ao mudar o ativo no dropdown o gráfico é atualizado. A tebela com os ativos da carteira é feita a partir da carteira vigente e da funçõa cotacoes_atulizadas presentes na Carteira.
+  Para rodar o dashboard é preciso criar o objeto carteira, usando a classe Carteira. Nesse construtor é preciso passar 3 parâmetros: dataCompra, carteiraVigente e nomeCarteira. Os gráficos de candlestick e retorno acumulado são criados a partir das funções grafico_candlestick e grafico_retorno_modelo. O gráfico de candlestick é feito atráves de um callback, assim, ao mudar o ativo no dropdown o gráfico é atualizado. A tebela com os ativos da carteira é feita a partir da carteira vigente e da função cotacoes_atulizadas presentes na classe Carteira.
 
   Na classe Carteira é onde o csv com a carteira mensal é atualizada ou criada. Além disso, também é calculada a rentabilidade do modelo e feita a leitura dos dados baixados.
 
