@@ -1,4 +1,3 @@
-
 import datetime
 import pandas as pd
 import plotly.graph_objects as go
@@ -17,7 +16,7 @@ def grafico_candlestick(valor_dropdown, dados):
     cotacoes = dados[dados['ticker'] == valor_dropdown]
     cotacoes = cotacoes[(cotacoes['data'] <= ultimoDia[-1]) & (cotacoes['data'] >= cincoDiasAtras)]
 
-    layout = go.Layout(yaxis= dict(tickfont=dict(color="#D3D6DF"), showline = False), xaxis=dict(tickfont=dict(color="#D3D6DF"), showline = False))
+    layout = go.Layout(yaxis= dict(tickfont=dict(color="#D3D6DF"), showline = False), xaxis=dict(tickfont=dict(color="#D3D6DF"), showline = False), template= 'slate')
 
     graficoCandleStick = go.Figure(data= [go.Candlestick(
         x= cotacoes['data'],
@@ -27,8 +26,10 @@ def grafico_candlestick(valor_dropdown, dados):
         close= cotacoes['preco_fechamento_ajustado'])
         ], layout= layout)
 
-    graficoCandleStick.update_layout(paper_bgcolor='rgba(0,0,0,0)')
     graficoCandleStick.update_layout(xaxis_rangeslider_visible=False)
+    graficoCandleStick.update_xaxes(rangebreaks=[dict(bounds=['sat','mon'])])
+    graficoCandleStick.update_layout(margin= dict(l=16, r=16, t=16, b=16))
+    graficoCandleStick.update_layout(paper_bgcolor='rgba(0,0,0,0)')
 
     return graficoCandleStick
 
@@ -55,17 +56,20 @@ def grafico_retorno_modelo(retornoModelo, ibov, cdi):
     cdi['retorno_acum'] = (1 + cdi['retorno']).cumprod() - 1
 
 
+    layout = go.Layout(template= 'slate')
+
     graficoRetornoModelo = go.Figure(
-        data = [go.Scatter(x= dfRetornoModelo.index, y= ibov['retorno_acum'], name='IBOV',line_shape='spline', line_color= 'black'), go.Scatter(x= dfRetornoModelo.index, y= dfRetornoModelo['retorno_acum'], name='Carteira',line_shape='spline', line_color= 'green'), go.Scatter(x= dfRetornoModelo.index, y= cdi['retorno_acum'], name='CDI', line_color= 'gray')]
+        data = [go.Scatter(x= dfRetornoModelo.index, y= ibov['retorno_acum'], name='IBOV',line_shape='spline'), go.Scatter(x= dfRetornoModelo.index, y= dfRetornoModelo['retorno_acum'], name='Carteira',line_shape='spline'), go.Scatter(x= dfRetornoModelo.index, y= cdi['retorno_acum'], name='CDI',)], layout= layout
     )
     
+    graficoRetornoModelo.update_layout(template= 'slate')
     graficoRetornoModelo.update_xaxes(showgrid= False)
     graficoRetornoModelo.update_yaxes(showgrid= False)
-    graficoRetornoModelo.update_layout(plot_bgcolor= 'white')
-    graficoRetornoModelo.update_layout(yaxis= dict(tickformat='.1%', tickfont= dict(color= 'black')), xaxis= dict(tickfont= dict(color= 'black')))
+    graficoRetornoModelo.update_layout(margin= dict(l=16, r= 16, t=16, b= 16))
     graficoRetornoModelo.update_layout(paper_bgcolor='rgba(0,0,0,0)')
-    graficoRetornoModelo.add_vline(dfRetornoModelo.index[0], line_color= 'black')
-    graficoRetornoModelo.add_hline(dfRetornoModelo['retorno_acum'].min() - 0.01, line_color= 'black')
 
+    graficoRetornoModelo.update_layout(yaxis= dict(tickformat='.1%', tickfont= dict(color= '#d3d3d3')), xaxis= dict(tickfont= dict(color= '#d3d3d3')))
+    graficoRetornoModelo.add_vline(dfRetornoModelo.index[0], line_color= '#d3d3d3')
+    graficoRetornoModelo.add_hline(dfRetornoModelo['retorno_acum'].min() - 0.01, line_color= '#d3d3d3')
 
     return graficoRetornoModelo

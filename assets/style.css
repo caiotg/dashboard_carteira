@@ -1,3 +1,23 @@
+.Select-menu-outer{
+    background:#272B30 !important;
+}
+
+.Select-menu-outer ::-webkit-scrollbar-track{
+    background: rgb(59, 59, 59);
+}
+
+.Select-menu-outer ::-webkit-scrollbar{
+    width: 10px;
+}
+
+.Select-menu-outer ::-webkit-scrollbar-thumb{
+    background: rgb(255, 255, 255);
+}
+
+.Select-value-label{
+    color: #F2F4F8 !important;
+}
+
 .titulo-dash{
 
     font-size: 25px;
@@ -8,4 +28,5 @@
     border-radius: 8px;
     color: white;
     padding: 0px 5px 2px 5px;
+    justify-content: center;
 }

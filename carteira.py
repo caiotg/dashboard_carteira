@@ -7,13 +7,12 @@ class Carteira():
 
     def __init__(self, dataCompra, carteiraVigente, nomeCarteira):
         
+        ibov = pd.read_parquet(r'dados\ibov.parquet')
+        cdi = pd.read_parquet(r'dados\cdi.parquet')
 
         dados = pd.read_parquet(r'dados\cotacoes.parquet')
         dados = dados[['data', 'ticker', 'preco_fechamento_ajustado']]
         
-        ibov = pd.read_parquet(r'dados\ibov.parquet')
-        cdi = pd.read_parquet(r'dados\cdi.parquet')
-
         self.dados = dados
         
         self.dataCompra = dataCompra
@@ -132,7 +131,6 @@ class Carteira():
         carteira.columns = ['Ticker', f'Preco Compra ({str(dataCompra)[0:10]})', f'Preco {str(dataAtual)[0:10]}']
 
         self.cotacoesAtualizadas = carteira
-
 
 if __name__ == "__main__":
 
