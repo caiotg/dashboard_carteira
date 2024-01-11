@@ -2,7 +2,7 @@
 
 Esse projeto foi feito para acompanhar a rentabilidade acumulada de uma carteira de investimentos. O dashboard tem um gráfico de candlestick com os últimos 30 dias de negociaçãos das ações presentes na carteira, uma tabela com os ativos da carteira e o preço de compra e um gráfico com a rentabilidade acumulada da carteira comparada ao ibov e cdi.
 
-* obs: o projeto foi pensado para ser usado no Windows, para usar no Linux é preciso trocar as \ por / nos nomes dos arquivos para funcionar.
+* obs: o projeto foi pensado para ser usado no Windows, para usar no Linux é preciso trocar as \ por / nos nomes dos arquivos para funcionar. Para atualizar a data de compra e a carteira atual, é só alterar os paramentos passados para a classe carteira no arquivo layout_dashboard.py na pasta components
 
   ## Carteiras
   Na pasta carteiras é onde fica armazenado o csv com as carteiras mensais, para criar mais de uma carteira basta apenas mudar o paramentro nomeCarteira na classe Carteira.
